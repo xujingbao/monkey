@@ -16,7 +16,7 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+		<el-table :data="users" highlight-current-row v-loading="listLoading" border @selection-change="selsChange" style="width: 100%;">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
 			<el-table-column type="index" width="60">
@@ -31,10 +31,12 @@
 			</el-table-column>
 			<el-table-column prop="addr" label="地址" min-width="180" sortable>
 			</el-table-column>
-			<el-table-column label="操作" width="150">
+			<el-table-column label="操作" width="300">
 				<template scope="scope">
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+					<el-button type="danger" disabled size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
+					<el-button type="warning" size="small" @click="handleDel(scope.$index, scope.row)">禁用</el-button>
+					<el-button type="info" size="small" @click="handleDel(scope.$index, scope.row)">绑定</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -107,7 +109,13 @@
 <script>
 	import util from '../../common/js/util'
 	import NProgress from 'nprogress'
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
+	import {
+		getUserListPage,
+		removeUser,
+		batchRemoveUser,
+		editUser,
+		addUser
+	} from '../../api/api';
 
 	export default {
 		data() {
@@ -119,14 +127,16 @@
 				total: 0,
 				page: 1,
 				listLoading: false,
-				sels: [],//列表选中列
+				sels: [], //列表选中列
 
-				editFormVisible: false,//编辑界面是否显示
+				editFormVisible: false, //编辑界面是否显示
 				editLoading: false,
 				editFormRules: {
-					name: [
-						{ required: true, message: '请输入姓名', trigger: 'blur' }
-					]
+					name: [{
+						required: true,
+						message: '请输入姓名',
+						trigger: 'blur'
+					}]
 				},
 				//编辑界面数据
 				editForm: {
@@ -138,12 +148,14 @@
 					addr: ''
 				},
 
-				addFormVisible: false,//新增界面是否显示
+				addFormVisible: false, //新增界面是否显示
 				addLoading: false,
 				addFormRules: {
-					name: [
-						{ required: true, message: '请输入姓名', trigger: 'blur' }
-					]
+					name: [{
+						required: true,
+						message: '请输入姓名',
+						trigger: 'blur'
+					}]
 				},
 				//新增界面数据
 				addForm: {
@@ -187,7 +199,9 @@
 				}).then(() => {
 					this.listLoading = true;
 					NProgress.start();
-					let para = { id: row.id };
+					let para = {
+						id: row.id
+					};
 					removeUser(para).then((res) => {
 						this.listLoading = false;
 						NProgress.done();
@@ -226,7 +240,8 @@
 							this.editLoading = true;
 							NProgress.start();
 							let para = Object.assign({}, this.editForm);
-							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
+							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth),
+								'yyyy-MM-dd');
 							editUser(para).then((res) => {
 								this.editLoading = false;
 								NProgress.done();
@@ -251,7 +266,8 @@
 							this.addLoading = true;
 							NProgress.start();
 							let para = Object.assign({}, this.addForm);
-							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth), 'yyyy-MM-dd');
+							para.birth = (!para.birth || para.birth == '') ? '' : util.formatDate.format(new Date(para.birth),
+								'yyyy-MM-dd');
 							addUser(para).then((res) => {
 								this.addLoading = false;
 								NProgress.done();
@@ -279,7 +295,9 @@
 				}).then(() => {
 					this.listLoading = true;
 					NProgress.start();
-					let para = { ids: ids };
+					let para = {
+						ids: ids
+					};
 					batchRemoveUser(para).then((res) => {
 						this.listLoading = false;
 						NProgress.done();
@@ -299,9 +317,7 @@
 			this.getUsers();
 		}
 	}
-
 </script>
 
 <style scoped>
-
 </style>
