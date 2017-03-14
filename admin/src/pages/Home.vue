@@ -2,7 +2,7 @@
 	<el-row class="container">
 		<el-col :span="24" class="header">
 			<el-col :span="20" class="logo">
-				<img src="../assets/logo.png" /> <span>a <i class="txt">Monkey</i></span>
+				<img src="../assets/logo.png" /><span><i class="txt">Monkey</i></span>
 			</el-col>
 			<el-col :span="4" class="userinfo">
 				<el-dropdown trigger="click">
@@ -18,7 +18,7 @@
 		<el-col :span="24" class="main">
 			<aside>
 				<el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen" @close="handleclose" @select="handleselect"
-					theme="dark" unique-opened router>
+				    theme="dark" unique-opened router>
 					<template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
 						<el-submenu :index="index+''" v-if="!item.leaf">
 							<template slot="title"><i :class="item.iconCls"></i>{{item.name}}</template>
@@ -26,7 +26,7 @@
 						</el-submenu>
 						<el-menu-item v-if="item.leaf&&item.children.length>0" :index="item.children[0].path"><i :class="item.iconCls"></i>{{item.children[0].name}}</el-menu-item>
 					</template>
-					</el-menu>
+				</el-menu>
 			</aside>
 			<section class="content-container">
 				<div class="grid-content bg-purple-light">
@@ -77,8 +77,7 @@
 			handleclose() {
 				//console.log('handleclose');
 			},
-			handleselect: function (a, b) {
-			},
+			handleselect: function (a, b) {},
 			//退出登录
 			logout: function () {
 				var _this = this;
@@ -90,8 +89,6 @@
 				}).catch(() => {
 
 				});
-
-
 			}
 		},
 		mounted() {
@@ -103,7 +100,6 @@
 			}
 		}
 	}
-
 </script>
 
 <style scoped lang="scss">
