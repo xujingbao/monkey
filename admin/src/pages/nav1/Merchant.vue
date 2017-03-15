@@ -25,10 +25,8 @@
 				</el-col>
 				<el-col :span="8">
 					<!--<div class="grid-content bg-purple">-->
-					<el-form-item label="注册名称" :rules="[
-      { required: true, message: '年龄不能为空'},
-      { type: 'number', message: '年龄必须为数字值'}
-    ]">
+					<el-form-item label="注册名称" :rules="[{ required: true, message: '年龄不能为空'},
+														   { type: 'number', message: '年龄必须为数字值'}]">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
 					<!--</div>-->
@@ -359,13 +357,13 @@
 			},
 			submitForm(formName) {
 				this.$refs(formName).validate((valid) => {
-					if(valid){
+					if (valid) {
 						alert('提交成功')
-					}else{
+					} else {
 						return false;
 					}
 				});
-			}	
+			}
 		}
 	}
 </script>
