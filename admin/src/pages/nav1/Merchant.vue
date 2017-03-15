@@ -1,5 +1,5 @@
 <template>
-	<el-form ref="form" :model="form" label-width="80px" @submit.prevent="onSubmit" style="margin:20px;width:60%;min-width:600px;">
+	<el-form ref="form" :model="form" :label-position="left" label-width="80px" @submit.prevent="onSubmit" style="margin:20px;width:60%;min-width:600px;">
 		<!--基本信息-->
 		<el-card class="box-card">
 			<div slot="header" class="clearfix">
@@ -25,7 +25,10 @@
 				</el-col>
 				<el-col :span="8">
 					<!--<div class="grid-content bg-purple">-->
-					<el-form-item label="注册名称">
+					<el-form-item label="注册名称" :rules="[
+      { required: true, message: '年龄不能为空'},
+      { type: 'number', message: '年龄必须为数字值'}
+    ]">
 						<el-input v-model="form.name"></el-input>
 					</el-form-item>
 					<!--</div>-->
@@ -263,7 +266,7 @@
 				<el-input type="textarea" v-model="form.desc"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary">立即创建</el-button>
+				<el-button @click="submitForm('form')" type="primary">立即创建</el-button>
 				<el-button @click.native.prevent>取消</el-button>
 			</el-form-item>
 		</el-card>
@@ -353,7 +356,16 @@
 			},
 			onSubmit() {
 				console.log('submit!');
-			}
+			},
+			submitForm(formName) {
+				this.$refs(formName).validate((valid) => {
+					if(valid){
+						alert('提交成功')
+					}else{
+						return false;
+					}
+				});
+			}	
 		}
 	}
 </script>

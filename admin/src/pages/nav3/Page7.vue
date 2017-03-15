@@ -8,7 +8,7 @@
 	export default {
 		data() {
 			return {
-				url: 'https://ss.suixingpay.com/handBrushMerchantManagement/index'
+				url: 'http://auth.suixingpay.com?url=https://ss.suixingpay.com/handBrushMerchantManagement/index'
 			}
 		},
 		computed: {
