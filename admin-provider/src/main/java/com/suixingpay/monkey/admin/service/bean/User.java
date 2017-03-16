@@ -1,10 +1,7 @@
-/**
- *
- */
 package com.suixingpay.monkey.admin.service.bean;
 
 /**
- *
+ * Created By Evan Xu
  */
 public class User {
 

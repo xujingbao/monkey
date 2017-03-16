@@ -1,9 +1,7 @@
-/**
- *
- */
 package com.suixingpay.monkey.admin.service.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -12,17 +10,18 @@ import java.util.List;
 import com.suixingpay.monkey.admin.service.bean.User;
 
 /**
- *
+ * Created By Evan Xu
  */
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     /**
+     *
      * @return
      */
     @RequestMapping("/list")
-    public List<User> list() {
+    public List<User> list(@RequestParam(value = "name", defaultValue = "") String name) {
 
 
         List<User> userList = new ArrayList<User>();

@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.suixingpay.monkey.admin.service;
 
 import org.springframework.boot.SpringApplication;
@@ -10,11 +7,11 @@ import org.springframework.context.annotation.ImportResource;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
- *
+ * Created By Evan Xu
  */
 @SpringBootApplication
-@ImportResource(value = {"classpath:authorization_admin_service/admin-service-context.xml"})
-public class AuthorizationAdminServiceApplication {
+@ImportResource(value = {"classpath:admin-service-context.xml"})
+public class MonkeyAdminServiceApplication {
 
     private static LinkedBlockingDeque<Boolean> run = new LinkedBlockingDeque<Boolean>();
 
@@ -26,7 +23,7 @@ public class AuthorizationAdminServiceApplication {
      */
     public static void main(String[] args) throws Exception {
 
-        SpringApplication springApplication = new SpringApplication(AuthorizationAdminServiceApplication.class);
+        SpringApplication springApplication = new SpringApplication(MonkeyAdminServiceApplication.class);
 
         springApplication.run(args);
 
