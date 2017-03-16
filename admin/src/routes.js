@@ -84,7 +84,7 @@ let routes = [{
         children: [{
                 path: '/page6',
                 component: Page6,
-                name: '新增商户'
+                name: '新增商户2'
             },
             {
                 path: '/page7',

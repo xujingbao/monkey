@@ -1,54 +1,107 @@
 /**
  *  Promise based HTTP client for the browser and node.js (https://github.com/mzabriskie/axios)
- -   Make XMLHttpRequests from the browser
- -   Make http requests from node.js
- -   Supports the Promise API
- -   Intercept request and response
- -   Transform request and response data
- -   Cancel requests
- -   Automatic transforms for JSON data
- -   Client side support for protecting against XSRF
  */
 import axios from 'axios';
+import qs from 'qs';
 
-let base = '';
+/**
+ * axios配置
+ */
+axios.defaults.timeout = 5000
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+axios.defaults.baseURL = 'http://localhost:8080'
 
-export const requestLogin = params => {
-    return axios.post(`${base}/login`, params).then(res => res.data);
-};
+/**
+ * 添加请求拦截器
+ */
+axios.interceptors.request.use(function (config) {
+    // 在发送请求之前做些什么
+    if (config.method === 'post') {
+        config.data = qs.stringify(config.data)
+    }
+    return config
+}, function (error) {
+    // 对请求错误做些什么
+    return Promise.reject(error)
+});
 
-export const getUserList = params => {
-    return axios.get(`${base}/user/list`, {
-        params: params
-    });
-};
+/**
+ * 添加响应拦截器
+ */
+axios.interceptors.response.use(function (response) {
+    // 对响应数据做点什么
+    return response
+}, function (error) {
+    // 对响应错误做点什么
+    return Promise.reject(error)
+});
 
-export const getUserListPage = params => {
-    return axios.get(`${base}/user/listpage`, {
-        params: params
-    });
-};
+/**
+ *  fetch 
+ * @param {*} url 
+ * @param {*} params 
+ */
+export function fetch(url, params) {
+    return new Promise((resolve, reject) => {
+        axios.post(url, params).then(response => {
+            resolve(response.data)
+        }, err => {
+            reject(err)
+        }).catch((error) => {
+            reject(error)
+        })
+    })
+}
 
-export const removeUser = params => {
-    return axios.get(`${base}/user/remove`, {
-        params: params
-    });
-};
+export default {
 
-export const batchRemoveUser = params => {
-    return axios.get(`${base}/user/batchremove`, {
-        params: params
-    });
-};
+    /**
+     * 用户登录
+     * @param {*} params 
+     */
+    requestLogin(params) {
+        return fetch('/user/login', params);
+    },
 
-export const editUser = params => {
-    return axios.get(`${base}/user/edit`, {
-        params: params
-    });
-};
+    /**
+     * 获取用户列表
+     * @param {*} params 
+     */
+    getUserList(params) {
+        return fetch('/user/list', params);
+    }
+}
 
-export const addUser = params => {
-    return axios.get(`${base}/user/add`, {
-        params: params
-    });
-};
+// export const getUserList = params => {
+//     return fetch('/user/list', params);
+// }
+
+// export const getUserListPage = params => {
+//     return axios.get(`${base}/user/listpage`, {
+//         params: params
+//     });
+// };
+
+// export const removeUser = params => {
+//     return axios.get(`${base}/user/remove`, {
+//         params: params
+//     });
+// };
+
+// export const batchRemoveUser = params => {
+//     return axios.get(`${base}/user/batchremove`, {
+//         params: params
+//     });
+// };
+
+// export const editUser = params => {
+//     return axios.get(`${base}/user/edit`, {
+//         params: params
+//     });
+// };
+
+// export const addUser = params => {
+//     return axios.get(`${base}/user/add`, {
+//         params: params
+//     });
+// };

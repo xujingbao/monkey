@@ -33,7 +33,7 @@
 	</section>
 </template>
 <script>
-	import { getUserList } from '../../api/api';
+	import API from '../../api/api.js';
 	import NProgress from 'nprogress'
 	export default {
 		data() {
@@ -58,8 +58,8 @@
 				};
 				this.loading = true;
 				NProgress.start();
-				getUserList(para).then((res) => {
-					this.users = res.data.users;
+				API.getUserList(para).then((res) => {
+					this.users = res;
 					this.loading = false;
 					NProgress.done();
 				});

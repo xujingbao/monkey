@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<!--继承spring boot的日志风格-->
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+	<jmxConfigurator />
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>|%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level-[%msg]-[%logger{36}.java:%L]-[%thread]%n
+			</pattern>
+		</layout>
+	</appender>
+
+	<appender name="server"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/%d{yyyyMMdd}/server.log.%i</fileNamePattern>
+			<MaxHistory>100</MaxHistory>
+			<TimeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>100MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>|%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level-[%msg]-[%logger{36}.java:%L]-[%thread]%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="error"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/%d{yyyyMMdd}/error.log.%i</fileNamePattern>
+			<MaxHistory>30</MaxHistory>
+			<TimeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>50MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>|%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level-[%msg]-[%logger{36}.java:%L]-[%thread]%n
+			</pattern>
+		</encoder>
+	</appender>
+	<appender name="mybatis-plugin"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/%d{yyyyMMdd}/mybatis-plugin.log.%i</fileNamePattern>
+			<MaxHistory>100</MaxHistory>
+			<TimeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>100MB</MaxFileSize>
+			</TimeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder>
+			<pattern>|%d{yyyy-MM-dd HH:mm:ss.SSS}|%-5level-[%msg]-[%logger{36}.java:%L]-[%thread]%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<root level="info">
+		 <appender-ref ref="STDOUT" />
+		<appender-ref ref="server" />
+		<appender-ref ref="error" />
+	</root>
+
+</configuration>
