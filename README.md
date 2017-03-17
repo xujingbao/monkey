@@ -77,11 +77,12 @@ $ npm run dev
 admin采用前后分离的方式，需要启动两个服务
 
 ```shell
-# 启动管理y
+# 启动管理
 $ npm install 
 $ npm run dev
 
 # 启动Spring Boot
+$ gradle bootRun
 ```
 #### 开发工具
 

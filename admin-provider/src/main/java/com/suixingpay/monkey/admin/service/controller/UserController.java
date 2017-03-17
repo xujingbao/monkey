@@ -17,13 +17,14 @@ import com.suixingpay.monkey.admin.service.bean.User;
 public class UserController {
 
     /**
+     * 获取用户列表
      *
      * @return
      */
     @RequestMapping("/list")
     public List<User> list(@RequestParam(value = "name", defaultValue = "") String name) {
 
-
+        //
         List<User> userList = new ArrayList<User>();
 
         User user = new User();
@@ -45,8 +46,9 @@ public class UserController {
         return userList;
     }
 
-    public User login() {
-        return null;
+    public User login(@RequestParam(value = "name") String name, @RequestParam(value = "password") String password) {
+
+        return new User("随行付", "123456", "1", "6", "2011", "实兴大街");
     }
 
 }
