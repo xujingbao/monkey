@@ -1,10 +1,12 @@
 package com.suixingpay.monkey.admin.service.bean;
 
 /**
- * Created By Evan Xu
+ * A Domain Object
+ * Created By Evan Xu on 2017/3/15.
  */
 public class User {
 
+    private String id;
     private String name;
     private String password;
     private String sex;
@@ -15,13 +17,22 @@ public class User {
     public User() {
     }
 
-    public User(String name, String password, String sex, String age, String birth, String addr) {
+    public User(String id, String name, String password, String sex, String age, String birth, String addr) {
+        this.id = id;
         this.name = name;
         this.password = password;
         this.sex = sex;
         this.age = age;
         this.birth = birth;
         this.addr = addr;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

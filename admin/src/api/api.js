@@ -3,6 +3,12 @@
  */
 import axios from 'axios';
 import qs from 'qs';
+import _ from 'lodash'
+
+// lodash test
+// console.log(_.defer(function (stamp) {
+//     console.log(_.now() - stamp);
+// }, _.now()))
 
 /**
  * axios配置
@@ -43,7 +49,11 @@ axios.interceptors.response.use(function (response) {
  */
 export function fetch(url, params) {
     return new Promise((resolve, reject) => {
-        axios.post(url, params).then(response => {
+        axios({
+            method: 'get',
+            url: url,
+            data: params
+        }).then(response => {
             resolve(response.data)
         }, err => {
             reject(err)
@@ -71,7 +81,7 @@ export default {
      * @param {*} params 
      */
     getUserList(params) {
-        return fetch('/user/list', params);
+        return fetch('/users/', params);
     }
 }
 

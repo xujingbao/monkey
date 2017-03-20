@@ -38,6 +38,7 @@
     "html-webpack-plugin": "^2.26.0",
     "http-proxy-middleware": "^0.17.3",
     "json-loader": "^0.5.4",
+    "lodash": "^4.17.4",
     "mockjs": "^1.0.1-beta3",
     "node-sass": "^4.5.0",
     "opn": "^4.0.2",
