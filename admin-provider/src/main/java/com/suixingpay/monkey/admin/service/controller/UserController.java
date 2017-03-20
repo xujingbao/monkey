@@ -1,12 +1,13 @@
 package com.suixingpay.monkey.admin.service.controller;
 
 import com.suixingpay.monkey.admin.service.bean.User;
+import com.suixingpay.monkey.admin.service.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
-import java.util.*;
+import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created By Evan Xu on 2017/3/15.
@@ -14,11 +15,11 @@ import java.util.*;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
     //
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    //
-    static Map<String, User> users = Collections.synchronizedMap(new HashMap<String, User>());
+
+    @Resource
+    private UserService userService;
 
     /**
      * 处理"/users/"的GET请求，用来获取用户列表
@@ -27,9 +28,9 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Map<String, User> getUserList() {
+    public List<User> getUserList() {
         logger.info("getUserList success");
-        return users;
+        return userService.getUserList();
     }
 
     /**
@@ -42,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String addUser(@ModelAttribute User user) {
         logger.info("addUser {}", user);
-        users.put("", user);
+        userService.addUser(user);
         logger.info("addUser success");
         return "success";
     }
@@ -57,7 +58,7 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable String id) {
         logger.info("getUser begin");
-        User user = users.get(id);
+        User user = userService.getUser(id);
         logger.info("getUser {} success", user);
         return user;
     }
@@ -72,7 +73,7 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public String updateUser(@PathVariable String id, @ModelAttribute User user) {
         logger.info("updateUser {} begin", user);
-        users.put(id, user);
+        userService.updateUser(user);
         logger.info("updateUser success");
         return "success";
     }
@@ -86,18 +87,8 @@ public class UserController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String deleteUser(@PathVariable String id) {
         logger.info("deleteUser {} begin", id);
-        users.remove(id);
+        userService.deleteUser(id);
         logger.info("deleteUser success");
         return "success";
     }
-
-    @PostConstruct
-    public void init() {
-
-        User user = new User("1", "随行付", "123456", "0", "6", "2011", "实兴大街");
-        users.put(user.getId(), user);
-        user = new User("2", "许景宝", "123456", "1", "6", "2011", "实兴大街");
-        users.put(user.getId(), user);
-    }
-
 }

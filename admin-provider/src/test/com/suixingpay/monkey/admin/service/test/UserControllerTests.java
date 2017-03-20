@@ -34,8 +34,8 @@ public class UserControllerTests {
 
     @Test
     public void testUserController() throws Exception {
+        //
         RequestBuilder request = null;
-
         // 查下user列表，应该为空
         request = get("/users/");
         mvc.perform(request).andExpect(status().isOk()).andExpect(content().string(equalTo("{}")));
@@ -55,7 +55,6 @@ public class UserControllerTests {
         //再次获取，应该有刚才插入的数据
         request = get("/users/");
         mvc.perform(request).andExpect(status().isOk()).andExpect(content().string(equalTo("{\"\":{\"id\":\"99\",\"name\":\"随行付的单元测试\",\"password\":null,\"sex\":\"1\",\"age\":\"30\",\"birth\":null,\"addr\":null}}")));
-
     }
 }
 

@@ -43,14 +43,15 @@ axios.interceptors.response.use(function (response) {
 });
 
 /**
- *  fetch 
+ * 
  * @param {*} url 
  * @param {*} params 
+ * @param {*} method 
  */
-export function fetch(url, params) {
+export function fetch(url, params, method = 'get') {
     return new Promise((resolve, reject) => {
         axios({
-            method: 'get',
+            method: method,
             url: url,
             data: params
         }).then(response => {
@@ -73,7 +74,7 @@ export default {
      * @param {*} params 
      */
     requestLogin(params) {
-        return fetch('/user/login', params);
+        return fetch('/user/', params);
     },
 
     /**
@@ -82,6 +83,10 @@ export default {
      */
     getUserList(params) {
         return fetch('/users/', params);
+    },
+
+    addUser(params) {
+        return fetch('/users/', params, 'post');
     }
 }
 
