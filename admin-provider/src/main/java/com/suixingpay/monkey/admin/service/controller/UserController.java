@@ -13,7 +13,7 @@ import java.util.List;
  * Created By Evan Xu on 2017/3/15.
  */
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/v1/users")
 public class UserController {
     //
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);

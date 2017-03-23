@@ -82,11 +82,11 @@ export default {
      * @param {*} params 
      */
     getUserList(params) {
-        return fetch('/users/', params);
+        return fetch('/v1/users/', params);
     },
 
     addUser(params) {
-        return fetch('/users/', params, 'post');
+        return fetch('/v1/users/', params, 'post');
     }
 }
 
