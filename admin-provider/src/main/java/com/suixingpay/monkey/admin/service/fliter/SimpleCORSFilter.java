@@ -13,7 +13,8 @@ import java.io.IOException;
 public class SimpleCORSFilter implements Filter {
 
     /**
-     *  跨域处理
+     * 跨域处理
+     *
      * @param req
      * @param res
      * @param chain
