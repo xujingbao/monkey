@@ -17,17 +17,17 @@ public class SimpleCORSFilter implements Filter {
      *
      * @param req
      * @param res
-     * @param chain
+     * @param chainw
      * @throws IOException
      * @throws ServletException
      */
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-        HttpServletResponse response = (HttpServletResponse) res;
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "*");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
-        chain.doFilter(req, res);
+//        HttpServletResponse response = (HttpServletResponse) res;
+//        response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow-Methods", "*");
+//        response.setHeader("Access-Control-Max-Age", "3600");
+//        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+//        chain.doFilter(req, res);
     }
 
     public void init(FilterConfig filterConfig) {
