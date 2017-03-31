@@ -2,8 +2,6 @@
 
 ## 简介
 
-移动端框架采用 Native+Hybrid，Native支持iOS和Android两个平台，Hybrid基于 [Vue](https://cn.vuejs.org/v2/guide/) + [Cordova ](https://cordova.apache.org/docs/en/latest/)开发；框架带有后台配置管理画面，采用 Vue 开发，主题使用 [Element-UI ](http://element.eleme.io/#/zh-CN/component/installation)组件库。后台使用 [SpringBoot](https://projects.spring.io/spring-boot/) 提供 RESTful 服务。
-
 ## 文件架构
 
 ├── admin             Admin use Vue  
